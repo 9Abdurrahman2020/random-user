@@ -55,6 +55,51 @@ module.exports.updateAUser = (req, res) => {
       res.send({ err, data });
     });
   }
+  if (name) {
+    userControllers.patchAFile(id, { name }, (err, data) => {
+      res.send({ err, data });
+    });
+  }
+  if (contact) {
+    userControllers.patchAFile(id, { contact }, (err, data) => {
+      res.send({ err, data });
+    });
+  }
+  if (address) {
+    userControllers.patchAFile(id, { address }, (err, data) => {
+      res.send({ err, data });
+    });
+  }
+  if (photoUrl) {
+    userControllers.patchAFile(id, { photoUrl }, (err, data) => {
+      res.send({ err, data });
+    });
+  }
 };
-module.exports.updateBulkUser = (req, res) => {};
-module.exports.deleteAUser = (req, res) => {};
+module.exports.updateBulkUser = (req, res) => {
+  const { ids, data } = req.body;
+
+  if (Array.isArray(ids) && typeof data === "object" && !Array.isArray(data)) {
+    const updatedDatas = ids.reduce((acc, cur) => {
+      userControllers.patchAFile(cur, data, (err, data) => {
+        if (!err) {
+          acc.push(data);
+        }
+      });
+      return acc;
+    }, []);
+    res.send(updatedDatas);
+  } else {
+    res.status(400).send("bad request");
+  }
+};
+module.exports.deleteAUser = (req, res) => {
+  const { id } = req.params;
+  userControllers.deleteFile(id, (err) => {
+    if (!err) {
+      res.send("Delete successfull");
+    } else {
+      res.send("There is an error in the server");
+    }
+  });
+};

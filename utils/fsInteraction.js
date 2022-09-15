@@ -83,3 +83,10 @@ module.exports.patchAFile = (id, updateData, callback) => {
     }
   });
 };
+// delete file
+module.exports.deleteFile = (id, callback) => {
+  const filePath = join(__dirname + "/../public/users/");
+  fs.unlink(`${filePath}${id}.json`, (err) => {
+    callback(err);
+  });
+};
