@@ -10,4 +10,10 @@ app.all("*", (req, res) => {
   res.status(404).send("Route not found");
 });
 
+app.get("/", (req, res) => {
+  res.send({
+    message: "Server is live",
+  });
+});
+
 app.listen(5000, () => console.log("Server is running"));
