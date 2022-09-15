@@ -88,7 +88,7 @@ module.exports.updateBulkUser = (req, res) => {
       });
       return acc;
     }, []);
-    res.send(updatedDatas);
+    res.send("successfully updated");
   } else {
     res.status(400).send("bad request");
   }
