@@ -29,11 +29,11 @@ module.exports.saveAUser = (req, res) => {
   }
 };
 module.exports.getAUser = (req, res) => {
-  userControllers.getARandomFile((err, files) => {
+  userControllers.getARandomFile((err, file) => {
     if (err) {
-      res.send(err);
+      res.send(err.message);
     } else {
-      res.send(files);
+      res.send(file);
     }
   });
 };

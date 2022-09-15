@@ -25,7 +25,7 @@ module.exports.getARandomFile = (callback) => {
       callback("error in reading directory");
     } else {
       const randomFile = files[Math.floor(Math.random() * files.length)];
-      fs.readFile(`${filePath}${randomFile}`, (err2, data) => {
+      fs.readFile(`${filePath}${randomFile}`, "utf-8", (err2, data) => {
         if (!err2) {
           callback(null, data);
         }
